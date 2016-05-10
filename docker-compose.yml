@@ -2,8 +2,7 @@ version: '2'
 services:
   edr-static:
     build: .
-    command: sh -c 'npm install && jspm install'
+    command: sh -c 'npm install && jspm install && jspm bundle index.js -wid'
     volumes:
       - .:/src/
       - /src/node_modules
-      - /src/jspm_packages

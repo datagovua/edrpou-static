@@ -1,4 +1,10 @@
 {
+  "name": "edr",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "jspm": "git://github.com/vanuan/jspm-cli.git#patch-1"
+  },
   "jspm": {
     "name": "edr",
     "main": "app.js",
@@ -6,10 +12,15 @@
       "lib": "src"
     },
     "dependencies": {
+      "babel-types": "npm:babel-types@6.8.1",
       "react-dom": "npm:react-dom@^15.0.2"
     },
     "devDependencies": {
-      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.9"
+      "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@^6.8.0",
+      "core-js": "npm:core-js@^2.4.0",
+      "net": "github:jspm/nodelibs-net@^0.2.0-alpha",
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.9",
+      "tty": "github:jspm/nodelibs-tty@^0.2.0-alpha"
     },
     "peerDependencies": {
       "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
@@ -29,6 +40,28 @@
       "zlib": "github:jspm/nodelibs-zlib@^0.2.0-alpha"
     },
     "overrides": {
+      "npm:babel-types@6.8.1": {
+        "meta": {
+          "lib/index.js": {
+            "deps": [
+              "./definitions/init.js"
+            ],
+            "cjsDeferDepsExecute": true
+          },
+          "lib/definitions/init.js": {
+            "deps": [
+              "./index",
+              "./core",
+              "./es2015",
+              "./flow",
+              "./jsx",
+              "./misc",
+              "./experimental"
+            ],
+            "cjsDeferDepsExecute": true
+          }
+        }
+      },
       "npm:browserify-zlib@0.1.4": {
         "dependencies": {
           "readable-stream": "^2.0.2",
@@ -40,7 +73,7 @@
       },
       "npm:inherits@2.0.1": {
         "ignore": [
-          "test.js"
+          "index.js"
         ]
       }
     }
