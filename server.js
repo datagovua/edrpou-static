@@ -14,6 +14,7 @@ app.use('/jspm.config.js', handleStatic('jspm.config.js'));
 app.use('/index.js', handleStatic('index.js'));
 app.use('/build.js', handleStatic('build.js'));
 app.use('/build.js.map', handleStatic('build.js.map'));
+app.use('/static', express.static('/src/static'));
 
 function handleStatic(filename) {
   return function(req, res) {
