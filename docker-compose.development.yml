@@ -1,0 +1,12 @@
+version: '2'
+services:
+  edr-static:
+    build:
+      dockerfile: Dockerfile
+    command: jspm run server.js
+    #command: sh -c 'npm install && jspm install && jspm bundle index.js -wid'
+    ports:
+      - 8000:80
+    volumes:
+      - .:/src/
+      - /src/node_modules

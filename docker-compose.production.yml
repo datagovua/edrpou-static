@@ -1,0 +1,7 @@
+version: '2'
+services:
+  edr-static:
+    build:
+      dockerfile: Dockerfile-production
+    ports:
+      - 8000:80

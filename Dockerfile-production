@@ -1,10 +1,11 @@
 FROM node:4.4.3-slim
-
-WORKDIR /src/
-
-EXPOSE 80
-
-COPY package.json /src/
-RUN npm install
+RUN apt-get update && apt-get install -y git
+RUN npm install jspm@beta -g
 
 ADD . /src/
+WORKDIR /src/
+
+RUN npm install && jspm install && jspm bundle index.js build.js --minify
+
+CMD jspm run server.js
+EXPOSE 80
