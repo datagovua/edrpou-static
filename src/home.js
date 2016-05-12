@@ -12,8 +12,8 @@ export class Home extends React.Component {
             <li className="clearfix">
               <div className="step">
                 <h3>Приклад використання</h3>
-                <p>Пагінація: <a href="http://edr.data-gov-ua.org/companies?limit=10&skip=20&sort=id">/companies?limit=10&skip=20&sort=id</a></p>
-                <p>Пошук: <a href='http://edr.data-gov-ua.org/companies?where={"officialName":{"contains":"комунальне"}}'>{'/companies?where={"officialName":{"contains":"комунальне"}}'}</a></p>
+                <p>Пагінація: <a href="http://edr.data-gov-ua.org/api/companies?limit=10&skip=20&sort=id">/api/companies?limit=10&skip=20&sort=id</a></p>
+                <p>Пошук: <a href='http://edr.data-gov-ua.org/api/companies?where={"officialName":{"contains":"комунальне"}}'>{'/api/companies?where={"officialName":{"contains":"комунальне"}}'}</a></p>
               </div>
             </li>
             <li className="clearfix">
