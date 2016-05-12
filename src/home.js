@@ -19,7 +19,7 @@ export class Home extends React.Component {
             <li className="clearfix">
               <div className="step">
                 <h3>Документація</h3>
-                <p>Документація знаходиться за адресою: <a href="http://edr.data-gov-ua.org/docs/#!/default/get_company">http://edr.data-gov-ua.org/docs/#!/default/get_company</a></p>
+                <p>Документація знаходиться за адресою: <a href="http://edr.data-gov-ua.org/docs/#!/default/get_companies">http://edr.data-gov-ua.org/docs/#!/default/get_companies</a></p>
               </div>
             </li>
             <li className="clearfix">
