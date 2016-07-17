@@ -5,7 +5,7 @@ RUN npm install jspm@beta -g
 ADD . /src/
 WORKDIR /src/
 
-RUN npm install && jspm install && jspm bundle index.js build.js --minify
+RUN npm install && jspm install && jspm bundle browser.js build.js --minify
 
 CMD jspm run server.js
 EXPOSE 80

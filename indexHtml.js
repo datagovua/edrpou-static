@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function(html, initialState) {
   return `<!docype html>
 <html>
@@ -33,10 +35,10 @@ export default function(html, initialState) {
   <script src="jspm_packages/system.js"></script>
   <script src="jspm.browser.js"></script>
   <script src="jspm.config.js"></script>
+  <script src="build.js"></script>
   <script>
-    SystemJS.import('index.js');
+    SystemJS.import('browser.js');
   </script>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600' rel='stylesheet' type='text/css'>
 </body>
 </html>`;
 }

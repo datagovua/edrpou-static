@@ -3,10 +3,25 @@ services:
   edr-static:
     build:
       dockerfile: Dockerfile
-    command: jspm run server.js
-    #command: sh -c 'npm install && jspm install && jspm bundle index.js -wid'
+    command: sh -c "nodemon --exec jspm run server.js"
     ports:
       - 8000:80
+    environment:
+      GRAPHQL_URL: "http://edr.data-gov-ua.org/graphql/"
     volumes:
       - .:/src/
-      - /src/node_modules
+      - ./tmp/node_modules/:/src/node_modules
+      - ./tmp/npm_cache/:/root/.npm/
+      - ./tmp/jspm_cache/:/root/.jspm/
+      - ./tmp/tmp/:/tmp/
+  edr-watch:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    command: sh -c 'npm install && jspm install && jspm bundle browser.js -wid'
+    volumes:
+      - .:/src/
+      - ./tmp/node_modules/:/src/node_modules/
+      - ./tmp/npm_cache/:/root/.npm/
+      - ./tmp/jspm_cache/:/root/.jspm/
+      - ./tmp/tmp/:/tmp/

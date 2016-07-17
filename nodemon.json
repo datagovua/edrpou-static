@@ -1,0 +1,4 @@
+{
+  "verbose": true,
+  "ignore": ["jspm_packages/*", "node_modules/*", "jspm.*", "build.*", "tmp/*"]
+}
