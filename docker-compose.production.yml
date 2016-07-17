@@ -3,5 +3,7 @@ services:
   edr-static:
     build:
       dockerfile: Dockerfile-production
+    environment:
+      GRAPHQL_URL: "http://edr.data-gov-ua.org/graphql/"
     ports:
       - 8000:80

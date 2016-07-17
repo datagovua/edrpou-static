@@ -7,7 +7,7 @@ services:
     ports:
       - 8000:80
     environment:
-      GRAPHQL_URL: "http://edr.data-gov-ua.org/graphql/"
+      GRAPHQL_URL: "http://edr-graphql/"
     volumes:
       - .:/src/
       - ./tmp/node_modules/:/src/node_modules
@@ -25,3 +25,5 @@ services:
       - ./tmp/npm_cache/:/root/.npm/
       - ./tmp/jspm_cache/:/root/.jspm/
       - ./tmp/tmp/:/tmp/
+  edr-graphql:
+    image: 'vanuan/edrpou-graphql'

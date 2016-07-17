@@ -8,12 +8,8 @@ const pageSize = 30;
 const query = gql`
 query getCompanies($pageSize: Int!) {
   companies(first: $pageSize) {
-    edges {
-      node {
-        id,
-        officialName
-      }
-    }
+    edrpou,
+    officialName
   },
 }`;
 
@@ -31,12 +27,18 @@ class Companies extends React.Component {
     if(!this.props.data || this.props.data.loading) {
       return <p>Завантажується...</p>
     }
-    let companies = (!this.props.data.loading && this.props.data.companies.edges) || [];
-    let companyRows = companies.map((edge, key) => {
-      return <CompanyRow company={ edge.node } key={key} />;
+    if(this.props.data.errors) {
+      let renderErrors = this.props.data.errors.map((error, key) => {
+        return <p key={key}>{error.message}</p>;
+      });
+      return <p>Помилка завантаження... { renderErrors }</p>
+    }
+    let companies = (!this.props.data.loading && this.props.data.companies) || [];
+    let companyRows = companies.map((company, key) => {
+      return <CompanyRow company={ company } key={key} />;
     });
     return (
-      <ul style={{ height: 300, overflowY: "auto"}}>
+      <ul>
         { companyRows }
       </ul>
     );
