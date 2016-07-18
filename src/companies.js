@@ -27,7 +27,7 @@ const variables = {
 const CompanyRow = ({company}) => {
   return (
     <li>
-      <Link to={ `/company/${company.edrpou}` }>
+      <Link to={ `/company/${company.edrpou}` } style={{}} activeStyle={{}}>
         { company.officialName }
       </Link>
     </li>

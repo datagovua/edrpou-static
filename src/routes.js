@@ -1,14 +1,14 @@
-import { Home } from 'src/home.js';
+import { Organizations } from 'src/organizations.js';
 import { Api } from 'src/api.js';
 import { App } from 'src/app.js';
 
 const routes = [{
   path: '/',
   component: App,
-  indexRoute: { onEnter: (nextState, replace) => replace('/home') },
+  indexRoute: { onEnter: (nextState, replace) => replace('/about/api') },
   childRoutes: [
-    { path: 'home', component: Home },
-    { path: 'api', component: Api }
+    { path: 'organizations', component: Organizations },
+    { path: 'about/api', component: Api }
   ]
 }];
 
