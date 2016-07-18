@@ -1,24 +1,37 @@
 import React from "react";
-import ReactList from "react-list";
+import { Link } from 'react-router'
 import { connect } from "react-apollo";
 import gql from "apollo-client/gql";
 
 const pageSize = 30;
 
 const query = gql`
-query getCompanies($pageSize: Int!) {
-  companies(first: $pageSize) {
-    edrpou,
-    officialName
+query getCompanies($pageSize: Int!, $pageId: String) {
+  companies(first: $pageSize, after: $pageId) {
+    edges {
+      cursor
+      node {
+        id,
+        officialName,
+        edrpou
+      }
+    }
   },
 }`;
 
 const variables = {
-  pageSize
+  pageSize,
+  pageId: undefined
 };
 
 const CompanyRow = ({company}) => {
-  return <li>{ company.officialName }</li>
+  return (
+    <li>
+      <Link to={ `/company/${company.edrpou}` }>
+        { company.officialName }
+      </Link>
+    </li>
+  );
 }
 
 class Companies extends React.Component {
@@ -33,9 +46,9 @@ class Companies extends React.Component {
       });
       return <p>Помилка завантаження... { renderErrors }</p>
     }
-    let companies = (!this.props.data.loading && this.props.data.companies) || [];
-    let companyRows = companies.map((company, key) => {
-      return <CompanyRow company={ company } key={key} />;
+    let companies = (!this.props.data.loading && this.props.data.companies.edges) || [];
+    let companyRows = companies.map((company) => {
+      return <CompanyRow company={ company.node } key={ company.cursor } />;
     });
     return (
       <ul>

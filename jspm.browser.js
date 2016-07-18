@@ -338,8 +338,7 @@ SystemJS.config({
       "npm:lodash.isobject@3.0.2/index.js",
       "npm:lodash.isobject@3.0.2.json",
       "npm:react-apollo@0.3.19/ApolloProvider.js",
-      "npm:react-list@0.7.18/react-list.js",
-      "npm:react-list@0.7.18.json",
+      "npm:systemjs-plugin-babel@0.0.11/babel-helpers/taggedTemplateLiteral.js",
       "npm:react-dom@15.0.2/index.js",
       "npm:react-dom@15.0.2.json",
       "npm:react@15.1.0/lib/ReactDOM.js",
@@ -470,8 +469,7 @@ SystemJS.config({
       "npm:react@15.1.0/lib/BeforeInputEventPlugin.js",
       "npm:react@15.1.0/lib/SyntheticInputEvent.js",
       "npm:react@15.1.0/lib/SyntheticCompositionEvent.js",
-      "npm:react@15.1.0/lib/FallbackCompositionState.js",
-      "npm:systemjs-plugin-babel@0.0.11/babel-helpers/taggedTemplateLiteral.js"
+      "npm:react@15.1.0/lib/FallbackCompositionState.js"
     ]
   }
 });
