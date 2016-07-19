@@ -123,6 +123,7 @@ SystemJS.config({
       "npm:systemjs-plugin-babel@0.0.11/babel-helpers/extends.js",
       "npm:systemjs-plugin-babel@0.0.11.json",
       "src/api.js",
+      "src/organization.js",
       "src/organizations.js",
       "src/companies.js",
       "npm:apollo-client@0.3.12/gql.js",
