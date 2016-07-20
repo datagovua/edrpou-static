@@ -3,11 +3,10 @@ import { Link } from 'react-router'
 import { connect } from "react-apollo";
 import gql from "apollo-client/gql";
 
-const pageSize = 30;
 
 const query = gql`
-query getCompanies($pageSize: Int!, $pageId: String) {
-  companies(first: $pageSize, after: $pageId) {
+query getCompanies($pageSize: Int!, $after: String, $before: String) {
+  companies(first: $pageSize, after: $after, before: $before) {
     edges {
       cursor
       node {
@@ -19,10 +18,6 @@ query getCompanies($pageSize: Int!, $pageId: String) {
   },
 }`;
 
-const variables = {
-  pageSize,
-  pageId: undefined
-};
 
 const CompanyRow = ({company}) => {
   return (
@@ -50,21 +45,38 @@ class Companies extends React.Component {
     let companyRows = companies.map((company) => {
       return <CompanyRow company={ company.node } key={ company.cursor } />;
     });
+    let firstCursor = companies[0].cursor;
+    let lastCursor = companies[companies.length - 1].cursor;
     return (
-      <ul>
-        { companyRows }
-      </ul>
+      <div>
+        <ul>
+          { companyRows }
+        </ul>
+        <div style= {{paddingTop: "2em"}}>
+          <LinkButton query={{ before: firstCursor }} name="Назад" />
+          <LinkButton query={{ after: lastCursor }} name="Далі" />
+        </div>
+      </div>
     );
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    companies: state.companies,
-  };
-}
+const LinkButton = ({query, name}) => (
+  <Link to={{ pathname: '/organizations', query }}>
+    <div style={{ display: "inline", marginTop: "1em", marginRight: "1em", padding: "1em", textAlign: "center", border: "1px solid rgb(152, 34, 121)", borderRadius: "4px" }}>
+      {name}
+    </div>
+  </Link>
+);
+
 
 function mapQueriesToProps({ ownProps, state }) {
+  const pageSize = 15;
+  const variables = {
+    pageSize,
+    after: ownProps.query && ownProps.query.after,
+    before: ownProps.query && ownProps.query.before
+  };
   return {
     data: {
       query,
@@ -76,8 +88,7 @@ function mapQueriesToProps({ ownProps, state }) {
 };
 
 const CompaniesWithData = connect({
-  mapQueriesToProps,
-  mapStateToProps
+  mapQueriesToProps
 })(Companies);
 
 export default CompaniesWithData;

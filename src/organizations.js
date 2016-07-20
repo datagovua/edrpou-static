@@ -1,15 +1,18 @@
 import React from 'react';
 import Companies from './companies';
 
-export const Organizations = () => (
+export const Organizations = (props) => {
+  return (
   <Section name="Організації">
-    <Companies pageSize="10" />
+    <Companies pageSize="10" query={props.location.query} />
   </Section>
-);
+  );
+}
+
 
 export const Section = ({name, children}) => (
   <div className="section">
-    <h3>{name}</h3>
+    { name ? <h3>{name}</h3> : null }
     {children}
   </div>
 );
