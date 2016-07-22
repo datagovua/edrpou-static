@@ -1,14 +1,20 @@
 import React from 'react';
+import Helmet from 'react-helmet';
+
 import Companies from './companies';
 
-export const Organizations = (props) => {
-  return (
+
+export const Organizations = (props) => (
   <Section name="Організації">
+    <Helmet
+      title="Організації"
+      meta={[
+        {"name": "robots", "content": "noindex, follow"}
+      ]}
+    />
     <Companies pageSize="10" query={props.location.query} />
   </Section>
-  );
-}
-
+);
 
 export const Section = ({name, children}) => (
   <div className="section">

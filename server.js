@@ -1,6 +1,7 @@
 import express from 'express';
 import proxy from 'proxy-middleware';
 import React from 'react';
+import Helmet from "react-helmet";
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import { getDataFromTree } from 'react-apollo/server';
@@ -60,7 +61,8 @@ function handleRender(req, res, next) {
       </ApolloProvider>);
       getDataFromTree(app).then(function({store, client}) {
         let htmlString = ReactDOM.renderToString(app);
-        htmlString = htmlTemplate(htmlString, store.getState());
+        let head = Helmet.rewind();
+        htmlString = htmlTemplate(htmlString, store.getState(), head);
         res.send(htmlString);
       }).catch(function(error) {
         console.error(error);

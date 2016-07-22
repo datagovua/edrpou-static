@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from "react-helmet";
 import { Link, IndexLink } from 'react-router';
 
 const activeStyle = {
@@ -24,21 +25,20 @@ const navBarStyle = {
   backgroundColor: "#118798",
 };
 
-export const App = ({children}) => {
-  return (
-    <div>
-      <div style={navBarStyle}>
-        <Link to="/" style={logoStyle} activeStyle={{}}>
-          <h1 style={{color: "white"}}>ЄДР API</h1>
-        </Link>
-        <Link to="/organizations" style={navStyle} activeStyle={activeStyle}>
-          Організації
-        </Link>
-        <Link to="/about/api" style={navStyle} activeStyle={activeStyle}>
-          Про API
-        </Link>
-      </div>
-      {children}
+export const App = ({children}) => (
+  <div>
+    <Helmet titleTemplate="%s - ЄДР API" />
+    <div style={navBarStyle}>
+      <Link to="/" style={logoStyle} activeStyle={{}}>
+        <h1 style={{color: "white"}}>ЄДР API</h1>
+      </Link>
+      <Link to="/organizations" style={navStyle} activeStyle={activeStyle}>
+        Організації
+      </Link>
+      <Link to="/about/api" style={navStyle} activeStyle={activeStyle}>
+        Про API
+      </Link>
     </div>
-  );
-}
+    {children}
+  </div>
+);

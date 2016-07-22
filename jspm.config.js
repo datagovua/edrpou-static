@@ -73,7 +73,7 @@ SystemJS.config({
     "buffer": "github:jspm/nodelibs-buffer@0.2.0-alpha",
     "child_process": "github:jspm/nodelibs-child_process@0.2.0-alpha",
     "constants": "github:jspm/nodelibs-constants@0.2.0-alpha",
-    "core-js": "npm:core-js@1.2.6",
+    "core-js": "npm:core-js@1.2.7",
     "crypto": "github:jspm/nodelibs-crypto@0.2.0-alpha",
     "domain": "github:jspm/nodelibs-domain@0.2.0-alpha",
     "events": "github:jspm/nodelibs-events@0.2.0-alpha",
@@ -90,6 +90,7 @@ SystemJS.config({
     "react": "npm:react@15.1.0",
     "react-apollo": "npm:react-apollo@0.3.19",
     "react-dom": "npm:react-dom@15.0.2",
+    "react-helmet": "npm:react-helmet@3.1.0",
     "react-list": "npm:react-list@0.7.18",
     "react-router": "npm:react-router@2.4.0",
     "redux": "npm:redux@3.5.2",
@@ -646,7 +647,7 @@ SystemJS.config({
     },
     "npm:fbjs@0.8.3": {
       "map": {
-        "core-js": "npm:core-js@1.2.6",
+        "core-js": "npm:core-js@1.2.7",
         "loose-envify": "npm:loose-envify@1.2.0",
         "object-assign": "npm:object-assign@4.1.0",
         "ua-parser-js": "npm:ua-parser-js@0.7.10",
@@ -703,6 +704,39 @@ SystemJS.config({
         "isarray": "npm:isarray@1.0.0",
         "ieee754": "npm:ieee754@1.1.6",
         "base64-js": "npm:base64-js@1.1.2"
+      }
+    },
+    "npm:react-helmet@3.1.0": {
+      "map": {
+        "react-side-effect": "npm:react-side-effect@1.0.2",
+        "deep-equal": "npm:deep-equal@1.0.1",
+        "shallowequal": "npm:shallowequal@0.2.2",
+        "object-assign": "npm:object-assign@4.1.0",
+        "warning": "npm:warning@2.1.0"
+      }
+    },
+    "npm:shallowequal@0.2.2": {
+      "map": {
+        "lodash.keys": "npm:lodash.keys@3.1.2"
+      }
+    },
+    "npm:react-side-effect@1.0.2": {
+      "map": {
+        "fbjs": "npm:fbjs@0.1.0-alpha.10"
+      }
+    },
+    "npm:lodash.keys@3.1.2": {
+      "map": {
+        "lodash._getnative": "npm:lodash._getnative@3.9.1",
+        "lodash.isarguments": "npm:lodash.isarguments@3.0.8",
+        "lodash.isarray": "npm:lodash.isarray@3.0.4"
+      }
+    },
+    "npm:fbjs@0.1.0-alpha.10": {
+      "map": {
+        "core-js": "npm:core-js@1.2.7",
+        "promise": "npm:promise@7.1.1",
+        "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
       }
     }
   }

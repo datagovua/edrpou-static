@@ -1,8 +1,10 @@
-import React from "react";
-import { connect } from "react-apollo";
-import gql from "apollo-client/gql";
+import React from 'react';
+import Helmet from 'react-helmet';
+import { connect } from 'react-apollo';
+import gql from 'apollo-client/gql';
 
 import { Section } from './organizations.js'
+
 
 const query = gql`
 query getCompanies($organizationId: Int!) {
@@ -29,6 +31,7 @@ const Row = ({name, children}) => (
 const Details = ({company}) => {
   return (
     <Section name={company.name || company.officialName}>
+      <Helmet title={company.officialName} />
       <table>
         <tbody>
         { company.name ? <Row name="Офіційна назва: ">{ company.officialName }</Row> : null }

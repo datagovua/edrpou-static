@@ -1,8 +1,12 @@
 import React from 'react';
+import Helmet from 'react-helmet';
+
 
 export const Api = () => {
   return (
     <div className="container">
+      <Helmet title="Про API" />
+
       <div className="steps">
         <ul>
           <li>
