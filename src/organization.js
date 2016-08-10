@@ -34,9 +34,17 @@ const Details = ({company}) => {
       <Helmet title={company.officialName} />
       <table>
         <tbody>
-        { company.name ? <Row name="Офіційна назва: ">{ company.officialName }</Row> : null }
-        <Row name="Адреса: ">{ company.address }</Row>
-        { company.mainPerson ? <Row name="Уповноважена особа: ">{ company.mainPerson }</Row> : null }
+        { company.name ? (<Row name="Офіційна назва: ">
+            <span itemProp="legalName">{ company.officialName }</span>
+          </Row>) : null }
+        <Row name="Адреса: ">
+          <span itemProp="address">{ company.address }</span>
+        </Row>
+        { company.mainPerson ? (<Row name="Уповноважена особа: ">
+            <span itemProp="employee" itemScope itemType="http://schema.org/Person">
+              <span itemProp="name">{ company.mainPerson }</span>
+            </span>
+          </Row>) : null }
         <Row name="Код ЄДРПОУ: ">{ company.edrpou }</Row>
         { company.occupation ? <Row name="Основна діяльність: ">{ company.occupation }</Row>: null }
         <Row name="Стан: ">{ company.status }</Row>

@@ -17,8 +17,8 @@ export const Organizations = (props) => (
 );
 
 export const Section = ({name, children}) => (
-  <div className="section">
-    { name ? <h3>{name}</h3> : null }
+  <div className="section" itemScope itemType="http://schema.org/Organization">
+    { name ? <h3 itemProp="name">{name}</h3> : null }
     {children}
   </div>
 );
