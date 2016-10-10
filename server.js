@@ -15,6 +15,7 @@ import routes from 'src/routes.js';
 import translateFunction from 'src/translate.js'
 
 const GRAPHQL_URL = process.env.GRAPHQL_URL;
+const ELASTIC_URL = process.env.ELASTIC_URL;
 
 let app = express();
 
@@ -31,7 +32,7 @@ app.use('/static', express.static('/src/static'));
 app.use('/jspm_packages', express.static('/src/jspm_packages'));
 
 app.use('/graphql', proxy(GRAPHQL_URL));
-app.use('/elasticsearch', proxy("http://edr.data-gov-ua.org:9200/companies_index/"));
+app.use('/elasticsearch', proxy(ELASTIC_URL));
 
 function handleStatic(filename) {
   return function(req, res) {
