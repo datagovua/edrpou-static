@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router'
-import { connect } from "react-apollo";
-import gql from "apollo-client/gql";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 
 
 const query = gql`
@@ -69,26 +69,20 @@ const LinkButton = ({query, name}) => (
   </Link>
 );
 
-
-function mapQueriesToProps({ ownProps, state }) {
-  const pageSize = 15;
-  const variables = {
-    pageSize,
-    after: ownProps.query && ownProps.query.after,
-    before: ownProps.query && ownProps.query.before
-  };
-  return {
-    data: {
-      query,
+const CompaniesWithData = graphql(query, {
+  options: (ownProps) => {
+    const pageSize = 15;
+    const variables = {
+      pageSize,
+      after: ownProps.query && ownProps.query.after,
+      before: ownProps.query && ownProps.query.before
+    };
+    return {
       variables,
       forceFetch: false,
       returnPartialData: false,
-    },
-  };
-};
-
-const CompaniesWithData = connect({
-  mapQueriesToProps
+    }
+  }
 })(Companies);
 
 export default CompaniesWithData;

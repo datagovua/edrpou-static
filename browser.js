@@ -4,8 +4,10 @@ import { Router, match, browserHistory } from 'react-router';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { SearchkitManager, SearchkitProvider } from 'searchkit';
 
 import routes from 'src/routes';
+import translateFunction from 'src/translate'
 
 
 const GRAPHQL_URL = `/graphql/`;
@@ -22,8 +24,13 @@ const store = createStore(
   )
 );
 
+const searchkit = new SearchkitManager("/elasticsearch/");
+searchkit.translateFunction = translateFunction.bind(searchkit);
+
 match({ history: browserHistory, routes }, (error, redirectLocation, renderProps) => {
-  render((<ApolloProvider store={store} client={client}>
-    <Router {...renderProps} />
-  </ApolloProvider>), document.getElementById('container'));
+  render((<SearchkitProvider searchkit={searchkit}>
+    <ApolloProvider store={store} client={client}>
+      <Router {...renderProps} />
+    </ApolloProvider>
+  </SearchkitProvider>), document.getElementById('container'));
 })

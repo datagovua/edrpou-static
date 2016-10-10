@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { connect } from 'react-apollo';
-import gql from 'apollo-client/gql';
+import { graphql } from "react-apollo";
+import gql from 'graphql-tag';
 
 import { Section } from './organizations.js'
 
@@ -78,21 +78,18 @@ class Organization extends React.Component {
   }
 }
 
-function mapQueriesToProps({ ownProps, state }) {
+const options = (ownProps) => {
   let organizationId = ownProps.params.organizationId;
   let variables = { organizationId };
   return {
-    data: {
-      query,
-      variables,
-      forceFetch: false,
-      returnPartialData: false,
-    },
+    variables,
+    forceFetch: false,
+    returnPartialData: false,
   };
 };
 
-const OrganizationWithData = connect({
-  mapQueriesToProps
+const OrganizationWithData = graphql(query, {
+  options
 })(Organization);
 
 export default OrganizationWithData;

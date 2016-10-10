@@ -32,6 +32,9 @@ export const App = ({children}) => (
       <Link to="/" style={logoStyle} activeStyle={{}}>
         <h1 style={{color: "white"}}>ЄДР API</h1>
       </Link>
+      <Link to="/search" style={navStyle} activeStyle={activeStyle}>
+        Пошук
+      </Link>
       <Link to="/organizations" style={navStyle} activeStyle={activeStyle}>
         Організації
       </Link>

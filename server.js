@@ -8,10 +8,11 @@ import { getDataFromTree } from 'react-apollo/server';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { match, RouterContext } from 'react-router';
 import ReactDOM from 'react-dom/server';
+import { SearchkitManager, SearchkitProvider, BaseQueryAccessor } from 'searchkit';
 
 import htmlTemplate from 'indexHtml.js';
 import routes from 'src/routes.js';
-
+import translateFunction from 'src/translate.js'
 
 const GRAPHQL_URL = process.env.GRAPHQL_URL;
 
@@ -27,8 +28,10 @@ app.use('/build.js', handleStatic('build.js'));
 app.use('/build.js.map', handleStatic('build.js.map'));
 app.use('/favicon.ico', handleStatic('favicon.ico'));
 app.use('/static', express.static('/src/static'));
+app.use('/jspm_packages', express.static('/src/jspm_packages'));
 
 app.use('/graphql', proxy(GRAPHQL_URL));
+app.use('/elasticsearch', proxy("http://edr.data-gov-ua.org:9200/companies_index/"));
 
 function handleStatic(filename) {
   return function(req, res) {
@@ -39,6 +42,11 @@ function handleStatic(filename) {
 app.use(handleRender);
 
 function handleRender(req, res, next) {
+  const searchkit = new SearchkitManager("/elasticsearch/", {
+    useHistory: false
+  });
+  searchkit.translateFunction = translateFunction;
+
   const networkInterface = createNetworkInterface(GRAPHQL_URL);
 
   const client = new ApolloClient({ networkInterface, reduxRootKey: 'api' });
@@ -56,16 +64,23 @@ function handleRender(req, res, next) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
-      var app = (<ApolloProvider store={store} client={client} {...renderProps}>
-        <RouterContext {...renderProps} />
-      </ApolloProvider>);
+      var app = (
+        <SearchkitProvider searchkit={searchkit} {...renderProps}>
+        <ApolloProvider store={store} client={client} {...renderProps}>
+          <RouterContext {...renderProps} />
+        </ApolloProvider>
+        </SearchkitProvider>
+      );
       getDataFromTree(app).then(function({store, client}) {
+        // restore SearchkitManager state and render again
+        searchkit.removeAccessor(searchkit.getAccessorByType(BaseQueryAccessor));
         let htmlString = ReactDOM.renderToString(app);
         let head = Helmet.rewind();
         htmlString = htmlTemplate(htmlString, store.getState(), head);
         res.send(htmlString);
       }).catch(function(error) {
-        console.error(error);
+        console.error(error.stack);
+        console.error(error.graphQLErrors);
         res.status(500).send("500 Internal error");
       });
     } else {
