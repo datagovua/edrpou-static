@@ -163,6 +163,9 @@ SystemJS.config({
         "zlib-browserify": "npm:browserify-zlib@0.1.4"
       }
     },
+    "github:ssetem/qs@6.0.1": {
+      "main": "dist/qs"
+    },
     "npm:accepts@1.2.13": {
       "map": {
         "mime-types": "npm:mime-types@2.1.11",
