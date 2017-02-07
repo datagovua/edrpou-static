@@ -8,6 +8,7 @@ services:
       - 8000:80
     environment:
       GRAPHQL_URL: "http://edr-graphql/"
+      ELASTIC_URL: "http://edr.data-gov-ua.org:9200"
     volumes:
       - .:/src/
       - ./tmp/node_modules/:/src/node_modules
@@ -26,4 +27,12 @@ services:
       - ./tmp/jspm_cache/:/root/.jspm/
       - ./tmp/tmp/:/tmp/
   edr-graphql:
-    image: 'vanuan/edrpou-graphql'
+    build: ../edrpou-graphql/build
+    ports:
+      - 85:80
+    command: sh -c "npm install && npm start"
+    environment:
+      API_URL: "http://edr.data-gov-ua.org/api"
+      ELASTIC_URL: "http://edr.data-gov-ua.org:9200"
+    volumes:
+      - ../edrpou-graphql:/src

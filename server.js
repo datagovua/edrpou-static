@@ -1,5 +1,6 @@
 import express from 'express';
 import proxy from 'proxy-middleware';
+import url from 'url';
 import React from 'react';
 import Helmet from "react-helmet";
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
@@ -31,8 +32,8 @@ app.use('/favicon.ico', handleStatic('favicon.ico'));
 app.use('/static', express.static('/src/static'));
 app.use('/jspm_packages', express.static('/src/jspm_packages'));
 
-app.use('/graphql', proxy(GRAPHQL_URL));
-app.use('/elasticsearch', proxy(ELASTIC_URL));
+app.use('/graphql', proxy(url.parse(GRAPHQL_URL)));
+app.use('/elasticsearch', proxy(url.parse(ELASTIC_URL)));
 
 function handleStatic(filename) {
   return function(req, res) {
