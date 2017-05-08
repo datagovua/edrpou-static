@@ -1,5 +1,7 @@
 # edrpou-static
 
+[![Codefresh build status]( https://g.codefresh.io/api/badges/build?repoOwner=datagovua&repoName=edrpou-static&branch=master&pipelineName=edrpou-static&accountName=Vanuan&type=cf-1)]( https://g.codefresh.io/repositories/datagovua/edrpou-static/builds?filter=trigger:build;branch:master;service:59106b25951c4e0005887ba3~edrpou-static)
+
 Open Data in Ukraine
 Web application
 
